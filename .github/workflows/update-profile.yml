@@ -28,4 +28,4 @@ jobs:
           org-title: "Tool Forge"
           org-subtitle: "Development Tools & Frameworks"
           section-title: "Packages"
-          org-read-token: ${{ secrets.ORG_READ_TOKEN }}
+          org-read-token: ${{ secrets.GITFLOW_TOKEN }}
