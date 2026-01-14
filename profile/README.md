@@ -1,13 +1,13 @@
 # 🔨 assforge
 
-**Tool Forge** - Microsb Development Tools
+**Tool Forge** - Development Tools & Frameworks
 
 ## Packages
 
-| Package | Description |
-|---------|-------------|
-| [@assforge/cogent](https://github.com/assforge/agent-packages) | AI-first Collaborative Development Framework |
-| [gitflow-packages](https://github.com/assforge/gitflow-packages) | Git Workflow Tools |
+| Repository | Description |
+|------------|-------------|
+| [agent-packages](https://github.com/assforge/agent-packages) | Cogent - AI-first collaborative development framework (@assforge/cogent) |
+| [gitflow-packages](https://github.com/assforge/gitflow-packages) | GitFlow automation tools (@assforge/gitflow) |
 
 ---
-*Part of [Microsb Platform](https://microsb.net)*
+*Part of [Microsb Platform](https://microsb.net) · Auto-generated*
