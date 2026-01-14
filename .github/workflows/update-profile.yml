@@ -9,21 +9,19 @@ jobs:
     permissions:
       contents: write
     steps:
+      - name: Checkout this repo
+        uses: actions/checkout@v4
+
       - name: Checkout GitFlow Actions
         uses: actions/checkout@v4
         with:
           repository: ${{ vars.GITFLOW_REPO }}
           ref: main
           token: ${{ secrets.GITFLOW_TOKEN }}
-          path: .gitflow-actions
-
-      - name: Checkout this repo
-        uses: actions/checkout@v4
-        with:
-          path: repo
+          path: gitflow-actions
 
       - name: Update Organization Profile
-        uses: ./.gitflow-actions/actions/update-org-profile
+        uses: ./gitflow-actions/actions/update-org-profile
         with:
           org-name: "assforge"
           org-emoji: "🔨"
@@ -31,4 +29,3 @@ jobs:
           org-subtitle: "Development Tools & Frameworks"
           section-title: "Packages"
           org-read-token: ${{ secrets.GITFLOW_TOKEN }}
-          working-directory: repo
