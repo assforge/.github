@@ -12,20 +12,40 @@ jobs:
       - name: Checkout this repo
         uses: actions/checkout@v4
 
-      - name: Checkout GitFlow Actions
-        uses: actions/checkout@v4
-        with:
-          repository: ${{ vars.GITFLOW_REPO }}
-          ref: main
-          token: ${{ secrets.GITFLOW_TOKEN }}
-          path: .gitflow-actions
-
       - name: Update Organization Profile
-        uses: ./.gitflow-actions/actions/update-org-profile
-        with:
-          org-name: "assforge"
-          org-emoji: "🔨"
-          org-title: "Tool Forge"
-          org-subtitle: "Development Tools & Frameworks"
-          section-title: "Packages"
-          org-read-token: ${{ secrets.GITFLOW_TOKEN }}
+        env:
+          GH_TOKEN: ${{ secrets.GITFLOW_TOKEN }}
+          ORG_NAME: "assforge"
+          ORG_EMOJI: "🔨"
+          ORG_TITLE: "Tool Forge"
+          ORG_SUBTITLE: "Development Tools & Frameworks"
+          SECTION_TITLE: "Packages"
+        run: |
+          mkdir -p profile
+
+          cat > profile/README.md << EOF
+          # ${ORG_EMOJI} ${ORG_NAME}
+
+          **${ORG_TITLE}** - ${ORG_SUBTITLE}
+
+          ## ${SECTION_TITLE}
+
+          | Repository | Description |
+          |------------|-------------|
+          EOF
+
+          gh repo list "${ORG_NAME}" --no-archived --json name,description,url \
+            --jq 'sort_by(.name) | .[] | select(.name != ".github") | "| [\(.name)](\(.url)) | \(.description // "—") |"' \
+            >> profile/README.md
+
+          cat >> profile/README.md << 'FOOTER'
+
+          ---
+          *Part of [Microsb Platform](https://microsb.net) · Auto-generated*
+          FOOTER
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add profile/README.md
+          git diff --staged --quiet || git commit -m "chore: update repo index"
+          git push
