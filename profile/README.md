@@ -1,12 +1,14 @@
-# 🔨 assforge
+# ⚒️ assforge
 
-**Tool Forge** - Development Tools & Frameworks
+**Forge Tools** - Agent Framework & Development Tools
 
-## Packages
+## Forge Packages
 
 | Repository | Description |
 |------------|-------------|
+| [agent-daemon](https://github.com/assforge/agent-daemon) | Multi-Agent Harness — standardized SE pipeline server |
 | [agent-packages](https://github.com/assforge/agent-packages) | Cogent - AI-first collaborative development framework (@assforge/cogent) |
+| [agent-studio](https://github.com/assforge/agent-studio) | Cogent Studio — GraphQL daemon + Flutter UI for Agent Framework |
 | [gitflow-packages](https://github.com/assforge/gitflow-packages) | GitFlow automation tools (@assforge/gitflow) |
 
 ---
