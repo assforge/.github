@@ -1,6 +1,10 @@
 name: Update Profile Index
 
 on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '0 0 * * 1'  # Every Monday at midnight
   workflow_dispatch:
 
 jobs:
@@ -16,14 +20,14 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITFLOW_TOKEN }}
           ORG_NAME: "assforge"
-          ORG_EMOJI: "🔨"
-          ORG_TITLE: "Tool Forge"
-          ORG_SUBTITLE: "Development Tools & Frameworks"
-          SECTION_TITLE: "Packages"
+          ORG_EMOJI: "⚒️"
+          ORG_TITLE: "Forge Tools"
+          ORG_SUBTITLE: "Agent Framework & Development Tools"
+          SECTION_TITLE: "Forge Packages"
         run: |
           mkdir -p profile
 
-          cat > profile/README.md << EOF
+          cat > profile/README.md << PROFILE
           # ${ORG_EMOJI} ${ORG_NAME}
 
           **${ORG_TITLE}** - ${ORG_SUBTITLE}
@@ -32,7 +36,7 @@ jobs:
 
           | Repository | Description |
           |------------|-------------|
-          EOF
+          PROFILE
 
           gh repo list "${ORG_NAME}" --no-archived --json name,description,url \
             --jq 'sort_by(.name) | .[] | select(.name != ".github") | "| [\(.name)](\(.url)) | \(.description // "—") |"' \
